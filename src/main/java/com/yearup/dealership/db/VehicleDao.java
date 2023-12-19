@@ -91,7 +91,36 @@ public class VehicleDao {
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
         // TODO: Implement the logic to search vehicles by make and model
-        return new ArrayList<>();
+        List<Vehicle> vehicles = new ArrayList<>();
+        String query = "SELECT * FROM Vehicles WHERE vehicles.make " +
+                "LIKE ? AND vehicles.model LIKE ?;";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, make);
+            statement.setString(2, model);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Vehicle vehicle = new Vehicle();
+                do {
+                    vehicle.setVin(resultSet.getString("VIN"));
+                    vehicle.setMake(resultSet.getString("make"));
+                    vehicle.setModel(resultSet.getString("model"));
+                    vehicle.setYear(resultSet.getInt("year"));
+                    vehicle.setSold(resultSet.getBoolean("SOLD"));
+                    resultSet.getString("color");
+                    resultSet.getString("vehicleType");
+                    resultSet.getInt("odometer");
+                    resultSet.getDouble("price");
+
+                    vehicles.add(new Vehicle());
+
+                } while (resultSet.next());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
     }
 
     public List<Vehicle> searchByYearRange(int minYear, int maxYear) {
