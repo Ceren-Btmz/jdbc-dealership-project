@@ -16,6 +16,21 @@ public class LeaseDao {
 
     public void addLeaseContract(LeaseContract leaseContract) {
         // TODO: Implement the logic to add a lease contract
-        
+        String query = "INSERT INTO lease_contract VALUES (?, ?, ?, ?, ?);";
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, leaseContract.getContractId());
+            statement.setString(2, leaseContract.getVin());
+            statement.setObject(3, leaseContract.getLeaseStart());
+            statement.setObject(4, leaseContract.getLeaseEnd());
+            statement.setDouble(5, leaseContract.getMonthlyPayment());
+
+            int row = statement.executeUpdate();
+            System.out.println("Lease Contracted recorded! \n Row(s) updates " + row);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
