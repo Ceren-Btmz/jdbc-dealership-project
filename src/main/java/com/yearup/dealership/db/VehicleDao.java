@@ -16,10 +16,31 @@ public class VehicleDao {
 
     public void addVehicle(Vehicle vehicle) {
         // TODO: Implement the logic to add a vehicle
+        String query = "INSERT INTO vehicles VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, vehicle.getVin());
+            statement.setString(2, vehicle.getMake());
+            statement.setString(3, vehicle.getModel());
+            statement.setInt(4, vehicle.getYear());
+            statement.setBoolean(5, vehicle.isSold());
+            statement.setString(6, vehicle.getColor());
+            statement.setString(7, vehicle.getVehicleType());
+            statement.setInt(8, vehicle.getOdometer());
+            statement.setDouble(9, vehicle.getPrice());
+
+            int rows = statement.executeUpdate();
+            System.out.println("Vehicle added to inventory! \nRows updates: " + rows);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeVehicle(String VIN) {
         // TODO: Implement the logic to remove a vehicle
+        String query = "DELETE FROM vehicles WHERE VIN = ?;";
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
