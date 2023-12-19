@@ -56,7 +56,37 @@ public class VehicleDao {
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
         // TODO: Implement the logic to search vehicles by price range
-        return new ArrayList<>();
+
+        List<Vehicle> vehicles = new ArrayList<>();
+        String query = "SELECT * FROM Vehicles WHERE vehicles.price " +
+                "BETWEEN ? AND ?;";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setDouble(1, minPrice);
+            statement.setDouble(2, maxPrice);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                Vehicle vehicle = new Vehicle();
+                do {
+                    vehicle.setVin(resultSet.getString("VIN"));
+                    vehicle.setMake(resultSet.getString("make"));
+                    vehicle.setModel(resultSet.getString("model"));
+                    vehicle.setYear(resultSet.getInt("year"));
+                    vehicle.setSold(resultSet.getBoolean("SOLD"));
+                    resultSet.getString("color");
+                    resultSet.getString("vehicleType");
+                    resultSet.getInt("odometer");
+                    resultSet.getDouble("price");
+
+                    vehicles.add(new Vehicle());
+
+                } while (resultSet.next());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
     }
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
