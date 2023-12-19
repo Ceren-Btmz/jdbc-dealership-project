@@ -14,7 +14,6 @@ public class InventoryDao {
     }
 
     public void addVehicleToInventory(String vin, int dealershipId) {
-        // TODO: Implement the logic to add a vehicle to the inventory
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                  "INSERT INTO inventory (dealership_id, VIN) VALUES (?, ?)",
@@ -36,7 +35,6 @@ public class InventoryDao {
     }
 
     public void removeVehicleFromInventory(String vin) {
-        // TODO: Implement the logic to remove a vehicle from the inventory
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "DELETE FROM inventory WHERE VIN = ?")) {

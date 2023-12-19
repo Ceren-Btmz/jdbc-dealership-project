@@ -15,7 +15,6 @@ public class LeaseDao {
     }
 
     public void addLeaseContract(LeaseContract leaseContract) {
-        // TODO: Implement the logic to add a lease contract
         String query = "INSERT INTO lease_contract VALUES (?, ?, ?, ?, ?);";
         try (Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(query)) {

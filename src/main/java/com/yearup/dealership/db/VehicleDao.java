@@ -15,7 +15,6 @@ public class VehicleDao {
     }
 
     public void addVehicle(Vehicle vehicle) {
-        // TODO: Implement the logic to add a vehicle
         String query = "INSERT INTO vehicles VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try (Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(query)) {
@@ -39,7 +38,6 @@ public class VehicleDao {
     }
 
     public void removeVehicle(String VIN) {
-        // TODO: Implement the logic to remove a vehicle
         String query = "DELETE FROM vehicles WHERE VIN = ?;";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -55,8 +53,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
-        // TODO: Implement the logic to search vehicles by price range
-
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.price " +
                 "BETWEEN ? AND ?;";
@@ -74,10 +70,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
@@ -90,7 +86,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
-        // TODO: Implement the logic to search vehicles by make and model
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.make " +
                 "LIKE ? AND vehicles.model LIKE ?;";
@@ -108,10 +103,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
@@ -124,8 +119,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByYearRange(int minYear, int maxYear) {
-        // TODO: Implement the logic to search vehicles by year range
-
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.year " +
                 "BETWEEN ? AND ?;";
@@ -143,10 +136,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
@@ -159,8 +152,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByColor(String color) {
-        // TODO: Implement the logic to search vehicles by color
-
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.color LIKE ?;";
         try (Connection connection = dataSource.getConnection();
@@ -176,10 +167,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
@@ -192,8 +183,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByMileageRange(int minMileage, int maxMileage) {
-        // TODO: Implement the logic to search vehicles by mileage range
-
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.mileage " +
                 "BETWEEN ? AND ?;";
@@ -211,10 +200,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
@@ -227,8 +216,6 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByType(String type) {
-        // TODO: Implement the logic to search vehicles by type
-
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM Vehicles WHERE vehicles.type LIKE ?;";
         try (Connection connection = dataSource.getConnection();
@@ -244,10 +231,10 @@ public class VehicleDao {
                     vehicle.setModel(resultSet.getString("model"));
                     vehicle.setYear(resultSet.getInt("year"));
                     vehicle.setSold(resultSet.getBoolean("SOLD"));
-                    resultSet.getString("color");
-                    resultSet.getString("vehicleType");
-                    resultSet.getInt("odometer");
-                    resultSet.getDouble("price");
+                    vehicle.setColor(resultSet.getString("color"));
+                    vehicle.setVehicleType(resultSet.getString("vehicleType"));
+                    vehicle.setOdometer(resultSet.getInt("odometer"));
+                    vehicle.setPrice(resultSet.getDouble("price"));
 
                     vehicles.add(new Vehicle());
 
